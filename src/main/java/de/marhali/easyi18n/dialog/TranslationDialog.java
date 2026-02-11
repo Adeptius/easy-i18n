@@ -24,6 +24,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Base for add and edit translation dialogs.
@@ -62,9 +63,19 @@ abstract class TranslationDialog extends DialogWrapper {
         TranslationValue value = origin.getValue();
 
         this.keyField = new JBTextField(converter.toString(origin.getKey()));
-        this.localeValueFields = new HashMap<>();
+        this.localeValueFields = new LinkedHashMap<>();
 
-        for(String locale : InstanceManager.get(project).store().getData().getLocales()) {
+        Set<String> locales = InstanceManager.get(project).store().getData().getLocales();
+
+        List<String> sortedLocales = new ArrayList<>(locales);
+        sortedLocales.sort(Comparator.comparingInt((String l) -> switch (l) {
+            case "en" -> 0;
+            case "uk" -> 1;
+            case "ru" -> 2;
+            default -> 3;
+        }).thenComparing(Comparator.naturalOrder()));
+
+        for (String locale : sortedLocales) {
             var field = new JBTextArea(value != null ? value.get(locale) : null, 1, 1);
             field.setLineWrap(true);
             field.setWrapStyleWord(true);
@@ -135,6 +146,7 @@ abstract class TranslationDialog extends DialogWrapper {
                 .getPanel();
 
         panel.setMinimumSize(new Dimension(200, 150));
+        panel.setPreferredSize(new Dimension(1000, 380));
 
         return panel;
     }
