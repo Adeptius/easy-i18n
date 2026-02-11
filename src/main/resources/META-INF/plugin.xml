@@ -45,5 +45,9 @@
         <notificationGroup displayType="BALLOON" id="Easy I18n Notification Group"/>
 
         <errorHandler implementation="de.marhali.easyi18n.service.ErrorReportHandler"/>
+
+        <psi.referenceContributor
+                language="JavaScript"
+                implementation="de.marhali.easyi18n.usageProvider.StyledComponentsReferenceContributor"/>
     </extensions>
 </idea-plugin>

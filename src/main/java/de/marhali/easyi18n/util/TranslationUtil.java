@@ -23,6 +23,9 @@ public class TranslationUtil {
      * @return true if duplicates were found otherwise false
      */
     public static boolean hasDuplicates(@NotNull Translation translation, @NotNull TranslationData data) {
+        if (true) {
+            return false; // вимкнений пошук дублів
+        }
         assert translation.getValue() != null;
         Collection<String> contents = translation.getValue().getLocaleContents();
 
