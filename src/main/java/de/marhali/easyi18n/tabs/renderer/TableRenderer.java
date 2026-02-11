@@ -49,6 +49,9 @@ public class TableRenderer extends DefaultTableCellRenderer {
     }
 
     private boolean hasDuplicates(int checkRow, JTable table) {
+        if (true) {
+            return false;
+        }
         int columns = table.getColumnCount();
         int rows = table.getRowCount();
 
