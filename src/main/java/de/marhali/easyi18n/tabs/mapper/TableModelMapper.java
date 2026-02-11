@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -35,7 +36,15 @@ public class TableModelMapper implements TableModel {
         this.data = data;
         this.converter = converter;
 
-        this.locales = new ArrayList<>(data.getLocales());
+        ArrayList<String> locales = new ArrayList<>(data.getLocales());
+        locales.sort(Comparator.comparingInt((String l) -> switch (l) {
+            case "en" -> 0;
+            case "uk" -> 1;
+            case "ru" -> 2;
+            default -> 3;
+        }).thenComparing(Comparator.naturalOrder()));
+
+        this.locales = locales;
         this.fullKeys = new ArrayList<>(data.getFullKeys());
 
         this.updater = updater;

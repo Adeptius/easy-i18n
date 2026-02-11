@@ -23,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.*;
 
 /**
@@ -40,6 +42,8 @@ public class TableView implements FilteredBusListener {
     private JPanel rootPanel;
     private JPanel containerPanel;
 
+    private JBScrollPane scrollPane;
+
     public TableView(Project project) {
         this.project = project;
 
@@ -50,7 +54,50 @@ public class TableView implements FilteredBusListener {
         table.addKeyListener(new DeleteKeyListener(this::deleteSelectedRows));
         table.setDefaultRenderer(String.class, new TableRenderer());
 
-        containerPanel.add(new JBScrollPane(table));
+        table.setAutoResizeMode(JBTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+
+        scrollPane = new JBScrollPane(table);
+        containerPanel.add(scrollPane);
+
+        scrollPane.getViewport().addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                applyColumnPercentWidths();
+            }
+        });
+
+        SwingUtilities.invokeLater(this::applyColumnPercentWidths);
+    }
+
+    private void applyColumnPercentWidths() {
+        if (table.getColumnModel().getColumnCount() == 0) {
+            return;
+        }
+
+        int available = scrollPane.getViewport().getWidth();
+        if (available <= 0) {
+            return;
+        }
+
+        int colCount = table.getColumnModel().getColumnCount();
+        int firstN = Math.min(4, colCount);
+
+        int w25 = (int) Math.round(available * 0.23);
+
+        for (int i = 0; i < firstN; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(w25);
+        }
+
+        int remainingCols = colCount - firstN;
+        if (remainingCols > 0) {
+            int remainingWidth = Math.max(available - (w25 * firstN), 0);
+            int per = Math.max(remainingWidth / remainingCols, 30); // мінімум, щоб не схлопувалось
+            for (int i = firstN; i < colCount; i++) {
+                table.getColumnModel().getColumn(i).setPreferredWidth(per);
+            }
+        }
+
+        table.doLayout();
     }
 
     private void showEditPopup(int row) {
