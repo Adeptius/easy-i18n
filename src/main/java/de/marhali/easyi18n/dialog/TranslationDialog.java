@@ -68,11 +68,16 @@ abstract class TranslationDialog extends DialogWrapper {
         Set<String> locales = InstanceManager.get(project).store().getData().getLocales();
 
         List<String> sortedLocales = new ArrayList<>(locales);
-        sortedLocales.sort(Comparator.comparingInt((String l) -> switch (l) {
-            case "en" -> 0;
-            case "uk" -> 1;
-            case "ru" -> 2;
-            default -> 3;
+        sortedLocales.sort(Comparator.comparingInt((String l) -> {
+            if (l.startsWith("general_")) {
+                l = l.substring(8);
+            }
+            return switch (l) {
+                case "en" -> 0;
+                case "uk" -> 1;
+                case "ru" -> 2;
+                default -> 3;
+            };
         }).thenComparing(Comparator.naturalOrder()));
 
         for (String locale : sortedLocales) {
