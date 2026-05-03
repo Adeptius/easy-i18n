@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [5.0.2] - 2026-05-03
+
 ### Changed
 
 - Fallback to primitive string type for malformed JSON and JSON5 inputs
@@ -548,7 +550,8 @@ PLEASE CHECK THE MIGRATION GUIDE ON https://marhali.github.io/easy-i18n/migratio
 
 - README.md
 
-[Unreleased]: https://github.com/marhali/easy-i18n/compare/5.0.1...HEAD
+[Unreleased]: https://github.com/marhali/easy-i18n/compare/5.0.2...HEAD
+[5.0.2]: https://github.com/marhali/easy-i18n/compare/5.0.1...5.0.2
 [5.0.1]: https://github.com/marhali/easy-i18n/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/marhali/easy-i18n/compare/4.9.0...5.0.0
 [4.9.0]: https://github.com/marhali/easy-i18n/compare/4.8.1...4.9.0
