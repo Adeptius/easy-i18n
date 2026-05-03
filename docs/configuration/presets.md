@@ -94,6 +94,21 @@ Ruby on Rails with the standard [I18n gem](https://guides.rubyonrails.org/i18n.h
 
 ---
 
+### Angular Transloco
+
+[Transloco](https://jsverse.github.io/transloco/) (`@jsverse/transloco`) for Angular.
+
+- **File format**: JSON
+- **File layout**: `src/assets/i18n/{locale}.json`
+- **Key format**: `namespace:subKey` (e.g. `common:greeting`) — namespace is derived from the file name
+- **Flavor template**: `this.translocoService.translate("{i18nKey}")`
+- **Editor rules**:
+  - `translocoService.translate('key')` — synchronous lookup (TypeScript)
+  - `translocoService.selectTranslate('key')` — reactive Observable lookup (TypeScript)
+  - `<element transloco="key">` — attribute directive in Angular templates (HTML)
+
+---
+
 ### Angular ngx-translate
 
 [ngx-translate](https://github.com/ngx-translate/core) for Angular.

@@ -16,6 +16,7 @@ public enum ProjectConfigModulePreset {
     CUSTOM(ProjectConfigModulePresetCustom.class),
     // Custom framework specific implementations
     ANGULAR_NGX_TRANSLATE(AngularNgxTranslateModulePreset.class),
+    ANGULAR_TRANSLOCO(AngularTranslocoModulePreset.class),
     RAILS(RailsModulePreset.class),
     VUE_I18N(VueI18nModulePreset.class),
     REACT_I18NEXT(ReactI18nextModulePreset.class),

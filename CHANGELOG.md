@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Preset for AngularJS projects that use transloco for internationalization
+
 ## [5.0.2] - 2026-05-03
 
 ### Changed

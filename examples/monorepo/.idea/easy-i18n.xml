@@ -1175,6 +1175,81 @@
                       </list>
                     </option>
                   </EditorRuleState>
+                  <EditorRuleState>
+                    <option name="id" value="rule-transloco-attribute" />
+                    <option name="languages">
+                      <set>
+                        <option value="HTML" />
+                      </set>
+                    </option>
+                    <option name="triggerKind" value="PROPERTY_VALUE" />
+                    <option name="priority" value="0" />
+                    <option name="excludeRule" value="false" />
+                    <option name="constraints">
+                      <list>
+                        <EditorRuleConstraintState>
+                          <option name="type" value="PROPERTY_NAME" />
+                          <option name="value" value="transloco" />
+                          <option name="matchMode" value="EXACT" />
+                          <option name="negated" value="false" />
+                        </EditorRuleConstraintState>
+                      </list>
+                    </option>
+                  </EditorRuleState>
+                  <EditorRuleState>
+                    <option name="id" value="rule-transloco-ts" />
+                    <option name="languages">
+                      <set>
+                        <option value="TYPESCRIPT" />
+                      </set>
+                    </option>
+                    <option name="triggerKind" value="CALL_ARGUMENT" />
+                    <option name="priority" value="0" />
+                    <option name="excludeRule" value="false" />
+                    <option name="constraints">
+                      <list>
+                        <EditorRuleConstraintState>
+                          <option name="type" value="CALLABLE_NAME" />
+                          <option name="value" value="translate" />
+                          <option name="matchMode" value="EXACT" />
+                          <option name="negated" value="false" />
+                        </EditorRuleConstraintState>
+                        <EditorRuleConstraintState>
+                          <option name="type" value="ARGUMENT_INDEX" />
+                          <option name="value" value="0" />
+                          <option name="matchMode" value="EXACT" />
+                          <option name="negated" value="false" />
+                        </EditorRuleConstraintState>
+                      </list>
+                    </option>
+                  </EditorRuleState>
+                  <EditorRuleState>
+                    <option name="id" value="rule-transloco-select-translate" />
+                    <option name="languages">
+                      <set>
+                        <option value="TYPESCRIPT" />
+                      </set>
+                    </option>
+                    <option name="triggerKind" value="CALL_ARGUMENT" />
+                    <option name="priority" value="0" />
+                    <option name="excludeRule" value="false" />
+                    <option name="constraints">
+                      <list>
+                        <EditorRuleConstraintState>
+                          <option name="type" value="CALLABLE_NAME" />
+                          <option name="value" value="selectTranslate" />
+                          <option name="matchMode" value="EXACT" />
+                          <option name="negated" value="false" />
+                        </EditorRuleConstraintState>
+                        <EditorRuleConstraintState>
+                          <option name="type" value="ARGUMENT_INDEX" />
+                          <option name="value" value="0" />
+                          <option name="matchMode" value="EXACT" />
+                          <option name="negated" value="false" />
+                        </EditorRuleConstraintState>
+                      </list>
+                    </option>
+                  </EditorRuleState>
                 </list>
               </option>
             </ProjectConfigModuleState>
