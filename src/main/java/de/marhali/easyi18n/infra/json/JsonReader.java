@@ -45,7 +45,12 @@ public final class JsonReader extends FileReader {
     }
 
     private void readValue(@NotNull JsonElement element, @NotNull TranslationProducer producer) {
-        String dumpedElement = element.toString(); // JsonElement#toString() already provides escaped characters
-        finallyProduceWithValue(producer, new I18nValue(dumpedElement));
+        if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isString()) {
+            // Use the unquoted string content so translations can be edited/previewed without surrounding quotes
+            finallyProduceWithValue(producer, I18nValue.fromUnescaped(element.getAsString()));
+        } else {
+            String dumpedElement = element.toString(); // JsonElement#toString() already provides escaped characters
+            finallyProduceWithValue(producer, new I18nValue(dumpedElement));
+        }
     }
 }

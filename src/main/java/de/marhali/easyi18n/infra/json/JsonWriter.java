@@ -67,12 +67,25 @@ public final class JsonWriter extends FileWriter {
     }
 
     private @NotNull JsonElement toJsonElement(@NotNull I18nValue value) {
+        String raw = value.raw();
+
         try {
-            return JsonParser.parseString(value.raw());
+            JsonElement parsed = JsonParser.parseString(raw);
+
+            // Non-string values (numbers, booleans, null, arrays, objects) are only trusted if they
+            // roundtrip back to the exact same raw text. This is always true for values that actually
+            // originate from such a type (their raw text is produced by JsonElement#toString() itself),
+            // but prevents plain string content that merely resembles JSON syntax (e.g. "[ hidden ]" or
+            // an empty string, which Gson's lenient parser reads as null) from being misclassified.
+            boolean isNonStringLiteral = !(parsed.isJsonPrimitive() && parsed.getAsJsonPrimitive().isString());
+            if (isNonStringLiteral && parsed.toString().equals(raw)) {
+                return parsed;
+            }
         } catch (JsonSyntaxException ignored) {
-            // Fallback to primitive String value if raw input is kinda malformed
-            // and to support string values without explicit quotes
-            return new JsonPrimitive(value.raw());
+            // Raw input is not valid JSON on its own -> treat it as a plain string value below
         }
+
+        // Raw input represents a plain (unquoted) string value
+        return new JsonPrimitive(value.toUnescaped());
     }
 }
