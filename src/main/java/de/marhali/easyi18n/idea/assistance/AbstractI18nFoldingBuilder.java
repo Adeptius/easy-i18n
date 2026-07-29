@@ -20,14 +20,11 @@ import de.marhali.easyi18n.core.domain.rules.EditorFilePath;
 import de.marhali.easyi18n.idea.service.I18nProjectService;
 import de.marhali.easyi18n.idea.service.ModuleModificationTracker;
 import de.marhali.easyi18n.idea.service.ScheduledModuleLoaderService;
+import de.marhali.easyi18n.unitalk.utils.ForceFolding;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Abstract base class for all language-specific i18n folding builders.
@@ -101,6 +98,7 @@ public abstract class AbstractI18nFoldingBuilder extends FoldingBuilderEx implem
                 node, range, null, placeholder, Boolean.TRUE, Set.of(tracker.get(moduleId))
             ));
         });
+        ForceFolding.forceFold(descriptors, project, containingFile);
 
         return descriptors.toArray(FoldingDescriptor.EMPTY_ARRAY);
     }
