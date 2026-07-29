@@ -17,12 +17,17 @@ import de.marhali.easyi18n.idea.toolwindow.listener.DeleteKeyListener;
 import de.marhali.easyi18n.idea.toolwindow.listener.EnterKeyListener;
 import de.marhali.easyi18n.idea.toolwindow.listener.PopupClickListener;
 import de.marhali.easyi18n.idea.toolwindow.ui.ViewPanel;
+import de.marhali.easyi18n.unitalk.utils.TableViewModifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,7 +56,7 @@ public class I18nTableViewPanel implements ViewPanel<ModuleView.Table> {
 
         this.table = new JBTable();
         this.tableScrollPane = new JBScrollPane(table);
-
+        TableViewModifier.modify(table, tableScrollPane);
         table.setShowGrid(false);
         table.setIntercellSpacing(JBUI.emptySize());
         table.getTableHeader().setFont(JBUI.Fonts.label().asBold());
