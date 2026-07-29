@@ -16,6 +16,7 @@ import de.marhali.easyi18n.idea.messages.PluginBundle;
 import de.marhali.easyi18n.idea.service.I18nProjectService;
 import de.marhali.easyi18n.idea.service.PluginExecutorService;
 import de.marhali.easyi18n.idea.ui.components.FixedExpandableTextField;
+import de.marhali.easyi18n.unitalk.utils.LanguageSorter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,6 +25,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -231,7 +233,8 @@ public class TranslationDialog extends DialogWrapper {
             emptyLabel.setBorder(JBUI.Borders.empty(2, 8));
             builder.addComponent(emptyLabel);
         } else {
-            for (LocaleId localeId : localeIds) {
+            List<LocaleId> sortedLocales = LanguageSorter.sortLocales(localeIds);
+            for (LocaleId localeId : sortedLocales) {
                 var field = new FixedExpandableTextField();
                 field.setColumns(0);
                 field.setLocale(Locale.forLanguageTag(localeId.tag()));

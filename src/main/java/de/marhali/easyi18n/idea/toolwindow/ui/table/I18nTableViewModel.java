@@ -4,6 +4,7 @@ import com.intellij.ui.JBColor;
 import de.marhali.easyi18n.core.application.query.view.ModuleView;
 import de.marhali.easyi18n.core.domain.model.I18nKey;
 import de.marhali.easyi18n.core.domain.model.LocaleId;
+import de.marhali.easyi18n.unitalk.utils.LanguageSorter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +33,7 @@ public class I18nTableViewModel extends AbstractTableModel {
 
     public I18nTableViewModel(@NotNull ModuleView.Table view, @NotNull Consumer<@NotNull ValueUpdate> onHandleUpdate) {
         this.localeIds = view.locales();
+        LanguageSorter.sortLocales(localeIds);
         this.rows = view.rows();
         this.onHandleUpdate = onHandleUpdate;
     }
